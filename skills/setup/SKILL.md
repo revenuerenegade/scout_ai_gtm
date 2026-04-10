@@ -12,13 +12,13 @@
 Read skills/setup/SKILL.md and set up this repo for [your-domain.com]
 ```
 
-That's it. Claude will research your company, pre-fill every context file with real data, ask you 5 targeted questions for what it couldn't find publicly, and write the full repo in one shot.
+That's it. Claude will research your company, ask for any internal documentation you have, pre-fill every context file with real data, and write the full repo in one shot.
 
 ---
 
 ## What This Does
 
-Instead of filling in 6 context files from blank templates, you provide a domain and Claude does the research. The output is a repo that's 70–80% complete from public information alone. You fill in the remaining 20–30% — the things only you know: your win patterns, your anti-ICP, your current priorities.
+Instead of filling in 6 context files from blank templates, you provide a domain and Claude does the research. The output is a repo that's 70–80% complete from public information alone — and closer to 90–95% if you have internal docs to share.
 
 **What Claude can find publicly:**
 - Company overview, product description, value proposition
@@ -30,20 +30,28 @@ Instead of filling in 6 context files from blank templates, you provide a domain
 - Buyer personas (job postings, team page, customer titles)
 - Existing signal indicators (hiring patterns, recent news)
 
-**What gets marked `[inferred]` — and can be sharpened in the optional refinement pass:**
+**What internal docs unlock (if you have them):**
+- Actual ICP definition, tiers, and anti-ICP criteria
+- Real persona profiles with pain points and objection patterns
+- Validated messaging — the exact language that resonates
+- Use cases tied to specific customer segments
+- Win/loss patterns from real deals
+- Signals your team has actually observed
+
+**What gets marked `[inferred]` if neither public data nor internal docs cover it:**
 - ACV range and deal profile
 - Anti-ICP — who explicitly wastes your time
 - Top 3 signals you've observed or want to track
 - Current week's priorities
 - Competitive dynamics not visible publicly
 
-Claude writes the repo first. No questions upfront. After you see the result, it offers a 3-minute refinement pass (5 questions) to replace inferred fields with your actual data. Skip it and the repo still works.
+Claude writes the repo after research + any docs you share. After you see the result, it offers a targeted refinement pass for fields still marked `[inferred]`. Skip it and the repo still works.
 
 ---
 
 ## Step 1: Research the Company
 
-**If public data is limited** (bootstrapped company, stealth stage, minimal web presence): use what's available and mark more fields as `[inferred]`. A company with no Crunchbase entry → mark funding stage as `[inferred: bootstrapped or undisclosed]`. No G2 presence → skip competitor reviews, infer from their own positioning language. No case studies → infer personas from job postings and team page only. The repo will be less complete but still usable — the refinement pass in Step 5 exists exactly for this situation.
+**If public data is limited** (bootstrapped company, stealth stage, minimal web presence): use what's available and mark more fields as `[inferred]`. A company with no Crunchbase entry → mark funding stage as `[inferred: bootstrapped or undisclosed]`. No G2 presence → skip competitor reviews, infer from their own positioning language. No case studies → infer personas from job postings and team page only. The repo will be less complete but still usable — the docs step and refinement pass exist exactly for this situation.
 
 Given the domain, Claude researches:
 
@@ -74,78 +82,122 @@ Given the domain, Claude researches:
 
 ---
 
-## Step 2: Write All Context Files From Public Data
+## Step 2: Request Internal Documentation
 
-Do not ask any questions yet. Write every context file immediately using what was found in the research. Make the best inference you can for fields that aren't publicly confirmed — mark those fields with `[inferred]` so the user knows what to verify.
+After completing research, pause and ask the user for internal docs **before** writing any files. Internal docs replace inference with ground truth — the more you have, the fewer `[inferred]` tags end up in the repo.
 
-The goal is a working repo the user can immediately run skills against. Speed of first value over completeness.
+Present this message exactly:
 
-Do not write placeholder text — every field should have a real value or a clearly marked inference. "Series B SaaS companies" is not an ICP — infer the actual employee range, industry, and technographic signals from the customer base you found.
+```
+Research complete. Before I write the context files, do you have any
+internal documentation you can share? Even one doc cuts the inference
+significantly.
+
+Most useful (in order):
+1. Persona profiles or buyer personas doc — titles, pains, objections, what they care about
+2. Messaging framework or messaging house — positioning statements, value pillars, what not to say
+3. Use case library — specific use cases tied to segments or personas
+4. ICP definition — your actual tiers, firmographic criteria, anti-ICP
+5. Battlecards or competitive intel — win/loss patterns, how you beat each competitor
+6. Sales deck or pitch deck — often contains the clearest articulation of positioning
+7. Win/loss report or call recordings summary — what actually drives deals
+
+Drop any files directly into the chat. Share as many or as few as you have.
+If you don't have any of these, just type "skip" and I'll write from public data.
+```
+
+**When the user shares docs:**
+- Read every file they share before writing anything
+- Extract: ICP criteria, persona details, messaging language, use cases, competitive angles, signals, objection patterns
+- Note the source of each key piece of data — "from messaging doc" vs. "from public data" vs. "[inferred]"
+- Reconcile conflicts between internal docs and public data by defaulting to the internal doc (internal = ground truth)
+
+**When the user skips:**
+- Proceed immediately to Step 3. Do not ask again.
+
+**Acceptable doc formats:** Any readable file — Google Doc export, PDF, Notion export, Word doc, slide deck, CSV, plain text. If a file is unreadable, note it and proceed with what you have.
+
+---
+
+## Step 3: Write All Context Files
+
+Do not ask any more questions. Write every context file immediately using research + any docs provided. Prioritize data in this order:
+
+1. **Internal docs** — use verbatim or lightly edited. This is ground truth.
+2. **Public data** — from the research in Step 1.
+3. **Inference** — only when neither source covers it. Always mark as `[inferred]`.
+
+The goal is a working repo the user can immediately run skills against. Do not write placeholder text — every field should have a real value, a doc-sourced value, or a clearly marked inference.
 
 Write files in this order:
 
 ### 1. `context/profile.md`
-Fill with: company overview from research, product description, deal profile inferred from customer base and pricing page (mark as `[inferred]`), reference customers from public case studies.
+Fill with: company overview from research, product description, deal profile (from docs if available, otherwise `[inferred]` from pricing page and customer base), reference customers from public case studies or doc.
 
 ### 2. `context/icp-definition.md`
 Fill with:
-- Tier 1: the highest-fit segment you can infer from their positioning and customer base
-- Tier 2: adjacent segments visible from their customer base
-- Anti-ICP: infer from their positioning — who do they explicitly not target? Mark as `[inferred]` if not confirmed
-- ICP evolution log: one entry dated today — "Initial definition from setup. Based on public positioning. Validate against first 90 days of scored accounts."
+- Tier 1: from ICP doc if provided; otherwise infer from positioning and customer base
+- Tier 2: adjacent segments — from doc or inferred from customer base
+- Anti-ICP: from doc if provided (this is the hardest to infer publicly — mark `[inferred]` if not in docs)
+- ICP evolution log: one entry dated today — "Initial definition from setup. Sources: [list what was used — internal doc / public data / inferred]. Validate against first 90 days of scored accounts."
 
 ### 3. `context/signal-library.md`
 Fill with:
-- 3 Tier 1 signals: infer from hiring patterns, funding events, and job postings visible in research. Structure each with definition, detection method (Clay/LinkedIn/Crunchbase where applicable), point value, decay curve, and message hook. Mark as `[inferred]` — these will be replaced in the refinement pass if the user has better ones
-- 2 Tier 2 signals: infer from what you know about the company type — hiring signals, tech stack signals, or intent signals that typically apply to their category
-- Signal combinations: at least 1 combination using the signals above
-- Performance log: empty table with column headers, ready to fill
+- Tier 1 signals: use signals named in internal docs first; fill remaining slots with inferred signals from hiring patterns and funding events. Structure each with definition, detection method, point value, decay curve, and message hook.
+- Tier 2 signals: from docs or inferred from company category
+- Signal combinations: at least 1 combination using signals above
+- Performance log: empty table with headers, ready to fill
 
 ### 4. `context/positioning.md`
 Fill with:
-- Core positioning statement: extracted from their homepage and pricing page
-- Value pillars: 2–3 based on what they emphasize publicly (use their own language as a starting point, note where proof points are needed)
-- Competitive positioning: use the research + question 5
-- What not to say: infer from their positioning — what category do they want to avoid being lumped into?
-- Reference customers: from public case studies
+- Core positioning statement: from messaging doc if provided; otherwise extracted from homepage and pricing page
+- Value pillars: use the exact language from the messaging doc if available. Do not paraphrase. If not available, infer from what they emphasize publicly.
+- Use cases: from use case library if provided; otherwise infer from case studies and customer logos
+- Messaging by persona: one row per persona — primary hook, proof point, what to avoid. Pull from docs; infer where not covered.
+- Competitive positioning: from battlecards if provided; otherwise from research
+- What not to say: from messaging doc if available; otherwise infer from their own positioning language
+- Reference customers: from doc or public case studies
 
 ### 5. `context/competitor-radar.md`
 Fill with:
-- Top 3 competitors from research
-- For each: what you infer about when they win vs. lose (based on G2 reviews, positioning language, question 5 answer)
-- Note explicitly: "Win/loss patterns below are inferred from public data. Update after first 3 competitive deals."
+- Top 3 competitors from research or battlecards
+- For each: when they win, when they lose, our best counter-move. Use battlecard data if provided — this is where docs make the biggest difference.
+- Note if win/loss patterns are from internal data or `[inferred]` from public reviews and positioning.
 
 ### 6. `context/personas/`
-Create one file per persona identified in research (2–3 personas). For each:
+Create one file per persona. If persona docs were shared, use them as the primary source and supplement with public data. For each:
 - Title, seniority, decision role
-- What they measure themselves on (infer from job postings and G2 reviews)
-- What gets their attention (infer from the content they engage with publicly)
-- Outreach hooks: one hook per signal from the signal library
+- What they measure themselves on — from doc, or inferred from job postings and G2 reviews
+- Core pains and objections — from doc, or inferred from review language and sales content
+- What gets their attention — from doc or content they engage with publicly
+- Outreach hooks: one hook per Tier 1 signal from the signal library. Use messaging from the messaging doc where available.
 
 ### 7. `CLAUDE.md`
-Fill with all of the above — ICP summary, top 3 signals, persona table, positioning summary, current week's priorities from question 4.
+Fill with all of the above — ICP summary, top 3 signals, persona table, positioning summary. For "This Week's Priorities," leave blank with a prompt: `[Update with current campaign focus before running skills]`.
 
 ---
 
-## Step 3: Present the Summary and Offer Refinement
+## Step 4: Present the Summary and Offer Refinement
 
-After writing all files, show a summary — then offer the refinement pass as optional.
+After writing all files, show a summary that distinguishes doc-sourced from inferred fields — then offer a targeted refinement pass only for what's still `[inferred]`.
 
 ```
 Setup complete for [Company].
 
-Here's what was written from public data:
+Here's what was written:
 
 - CLAUDE.md — full context layer
 - context/profile.md — company overview, product, [N] reference customers
-- context/icp-definition.md — [N] tiers inferred from customer base and positioning
+- context/icp-definition.md — [N] tiers [from: internal doc / public data / inferred]
 - context/signal-library.md — [N] signals with detection methods
-- context/positioning.md — value pillars, messaging matrix, competitive summary
-- context/competitor-radar.md — [N] competitors with inferred win/loss patterns
-- context/personas/ — [N] personas: [titles]
+- context/positioning.md — value pillars, messaging by persona, competitive summary
+- context/competitor-radar.md — [N] competitors [from: battlecards / public data / inferred]
+- context/personas/ — [N] personas: [titles] [from: persona doc / public data / inferred]
 
-Fields marked [inferred] are Claude's best guess from public data.
-They're good enough to run skills against — but may not reflect your actual win patterns.
+[If inferred fields remain]:
+Fields still marked [inferred]: [list them]
+These are Claude's best guess — good enough to run skills against,
+but may not match your actual win patterns.
 
 ---
 
@@ -154,52 +206,57 @@ You can start using the repo right now:
   Read skills/account-research/SKILL.md and research [example account from their ICP]
 
 ---
-
-Want to sharpen what was inferred? Answer 5 quick questions and I'll
-update every file with your actual data. Takes 3 minutes.
+[If inferred fields remain]:
+Want to sharpen what's still inferred? I'll ask only about the gaps —
+[N] questions based on what wasn't in the docs. Takes 2–3 minutes.
 
 Type "refine" to continue, or skip and start running skills.
 ```
 
-If the user types "refine" (or similar confirmation), proceed to Step 5. Otherwise, stop here — the repo is ready to use.
+If there are no `[inferred]` fields remaining, skip the refinement offer entirely — the repo is complete.
 
 ---
 
-## Step 4: Refinement Pass (Optional)
+## Step 5: Targeted Refinement Pass (Optional)
 
-Ask exactly these 5 questions in a single message. Do not split them across multiple prompts.
+Only run this if `[inferred]` fields remain after Step 3.
+
+Identify which fields are still `[inferred]` and ask only the questions needed to resolve them. Do not ask the full 5-question list if docs already covered those fields.
+
+**Standard questions (ask only if field is still inferred):**
 
 ```
-5 questions to sharpen your context:
+[Ask only the questions relevant to remaining [inferred] fields]
 
-1. ACV range — what's a typical deal worth?
-   (e.g., "$20k–$80k" or "sub-$5k self-serve to $200k enterprise")
+ACV range — what's a typical deal worth?
+(Only ask if not found in docs or pricing page)
+e.g., "$20k–$80k" or "sub-$5k self-serve to $200k enterprise"
 
-2. Anti-ICP — who explicitly wastes your time?
-   Which company types, sizes, or situations should never enter your pipeline?
+Anti-ICP — who explicitly wastes your time?
+(Only ask if not in ICP doc)
+Which company types, sizes, or situations should never enter your pipeline?
 
-3. Top 3 signals — what tells you an account is ready to buy?
-   Can be rough — I'll structure them. (e.g., "when they hire a VP of Sales,"
-   "when they raise Series B," "when they're evaluating [competitor]")
+Top 3 signals — what tells you an account is ready to buy?
+(Only ask if not in docs or signal library is fully inferred)
+Can be rough — I'll structure them.
 
-4. This week — what's your current focus? Any active or planned campaigns?
+This week — what's your current focus? Any active or planned campaigns?
+(Always ask — this changes too frequently to be in any doc)
 
-5. Competitive nuance — anything not visible publicly?
-   A competitor you're seeing in most deals, or an angle that's been working?
+Competitive nuance — anything not in what you shared?
+(Only ask if battlecards were not provided or are missing a key competitor)
 ```
 
-After receiving the answers, update every relevant file — replace `[inferred]` fields with confirmed data, add anti-ICP to the ICP definition, update signal library with the signals they named, update CLAUDE.md priorities. Then confirm what changed:
+After receiving answers, update every relevant file — replace `[inferred]` fields with confirmed data. Then confirm what changed:
 
 ```
 Updated with your answers:
 
-- context/icp-definition.md — anti-ICP added, Tier 1 criteria sharpened
-- context/signal-library.md — replaced inferred signals with your 3 named signals
-- CLAUDE.md — priorities updated
-- [any other files that changed]
+- [file] — [what changed]
+- [file] — [what changed]
 
-All [inferred] flags removed from updated fields.
-Remaining [inferred] fields: [list any that still need confirmation]
+All [inferred] flags removed.
+[If any remain]: Still inferred: [list] — update these when you have the data.
 ```
 
 ---
@@ -210,9 +267,11 @@ Before presenting the summary, verify:
 
 - [ ] No file contains lorem ipsum, "TBD", or generic placeholder text
 - [ ] Every signal has a detection method (not just a description)
-- [ ] Every persona has at least one outreach hook
+- [ ] Every persona has at least one outreach hook tied to a real signal
+- [ ] Messaging in `positioning.md` uses the company's own language where docs were provided — not paraphrased
 - [ ] CLAUDE.md is scannable in under 2 minutes
 - [ ] The ICP definition is specific enough that two people would build the same list from it independently
 - [ ] Anti-ICP has at least 3 explicit exclusions
+- [ ] Every `[inferred]` tag is clearly labeled — no silent guesses
 
 If any of these fail, fix the file before presenting the summary.
