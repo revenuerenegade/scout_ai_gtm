@@ -1,10 +1,10 @@
-# Scout Prospecting 
+# Scout Prospecting
 
-Inspired by [The Revenue Architects](https://www.the-revenue-architects.com) — a GTM engineering firm based in San Francisco. 
+Created by [Revenue Renegades](https://www.revenuerenegades.ai) - a GrowthOps and GTM engineering firm in the United States.
 
-Modified by [Revenue Renegades](https://www.revenuerenegades.ai) - a GrowthOps and GTM engineering firm. 
+Inspired by [The Revenue Architects](https://www.the-revenue-architects.com) — a GTM engineering firm based in San Francisco.
 
-This repo is the open-source version of what we deploy for clients. Clone it, run setup once, and your sales team has an AI-powered GTM assistant in Claude.ai — no rebuilding context every session.
+This repo is the open-source version of what we deploy for clients. Clone it, run setup once, and your sales team has an AI-powered GTM assistant named Scout in Claude.ai — no rebuilding context every session.
 
 ---
 
@@ -16,6 +16,18 @@ This repo is the open-source version of what we deploy for clients. Clone it, ru
 | **Claude.ai Project** | All sales reps | Claude.ai web | Research, prospect scoring, sales messaging |
 
 Ops fills in the context once. Claude.ai serves it to reps automatically. When context changes, ops re-uploads the affected files. Reps get the update on their next message — no action needed on their end.
+
+---
+
+## Prerequisites
+
+You need **Claude Code** (the CLI) installed before running this repo.
+
+- [Quickstart guide — Anthropic docs](https://code.claude.com/docs/en/quickstart)
+- [Setup & install — Anthropic docs](https://code.claude.com/docs/en/setup)
+- [How to install Claude Code (YouTube)](https://www.youtube.com/watch?v=QsjrBQK0lTg)
+
+Once installed, verify with `claude --version`, then continue to **For GTM Ops** below.
 
 ---
 
