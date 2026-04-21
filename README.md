@@ -1,10 +1,10 @@
 # Scout Prospecting 
 
+Created by [Revenue Renegades](https://www.revenuerenegades.ai) - a GrowthOps and GTM engineering firm in the United States. 
+
 Inspired by [The Revenue Architects](https://www.the-revenue-architects.com) — a GTM engineering firm based in San Francisco. 
 
-Modified by [Revenue Renegades](https://www.revenuerenegades.ai) - a GrowthOps and GTM engineering firm. 
-
-This repo is the open-source version of what we deploy for clients. Clone it, run setup once, and your sales team has an AI-powered GTM assistant in Claude.ai — no rebuilding context every session.
+This repo is the open-source version of what we deploy for clients. Clone it, run setup once, and your sales team has an AI-powered GTM assistant named Scout in Claude.ai — no rebuilding context every session.
 
 ---
 
