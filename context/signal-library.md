@@ -1,6 +1,6 @@
 # Signal Library
 
-*Signals are observable events that predict pipeline conversion 30–90 days in advance. This library is the source of truth for all signal-based outreach. Every campaign in this repo traces back to at least one signal here.*
+*Signals are observable events that predict pipeline conversion 30–90 days in advance. This library is the source of truth for all signal-based outreach. Every play in this repo traces back to at least one signal here.*
 
 Last updated: [YYYY-MM-DD]
 
@@ -139,7 +139,7 @@ Run a weekly batch to recalculate scores with decay applied. Accounts that drop 
 
 ## Signal Performance Log
 
-*Track which signals are actually generating pipeline. Update after every campaign.*
+*Track which signals are actually generating pipeline. Update after every play.*
 
 | Signal | Outreach sent | Replies | Meetings | Pipeline | Notes |
 |--------|--------------|---------|----------|----------|-------|

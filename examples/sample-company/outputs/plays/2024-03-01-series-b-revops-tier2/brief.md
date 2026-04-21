@@ -1,4 +1,4 @@
-# Campaign Brief: Series B + RevOps Hire — Tier 2
+# Play Brief: Series B + RevOps Hire — Tier 2
 
 **Created:** 2024-03-01
 **Owner:** Marcus Webb (SDR Lead)
@@ -9,7 +9,7 @@
 ## Trigger Logic
 
 **Signal combination:** Series B announced in last 60 days AND active RevOps hire (last 30 days)
-Both signals must be present. Either alone goes to the standard single-signal campaign.
+Both signals must be present. Either alone goes to the standard single-signal play.
 
 **Suppression:** Existing customers, active opportunities, contacted in last 60 days, any unsubscribed contact.
 

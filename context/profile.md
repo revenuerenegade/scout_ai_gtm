@@ -71,8 +71,8 @@
 2. [Priority 2]
 3. [Priority 3]
 
-**Key campaigns active:**
-- [Campaign name] — [targeting X accounts, launched Y date]
+**Key plays active:**
+- [Play name] — [targeting X accounts, launched Y date]
 
 **Blockers:**
 - [What's slowing GTM down right now]

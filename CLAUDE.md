@@ -1,8 +1,6 @@
 # CLAUDE.md
 
-This file is the persistent context layer for your GTM repository. Claude Code reads it automatically at the start of every session. Fill it in once — keep it updated when things change.
-
-The full context lives in `context/`. This file is the summary layer: enough for Claude to execute most tasks without reading anything else, with pointers to deeper files when needed.
+Persistent context for this GTM repo. Claude Code reads this at the start of every session. The full context lives in `context/` — this file is the summary layer, enough to execute most tasks without reading anything else.
 
 ---
 
@@ -16,6 +14,8 @@ HQ: [City] | Website: [domain.com]
 GTM motion: [Sales-led / PLG + Sales / Community-led]
 ACV: [$X – $Y] | Sales cycle: [X days median]
 Primary channels: [Outbound / Inbound / Events — list in order of volume]
+
+Stack: see `context/profile.md`
 
 ---
 
@@ -77,13 +77,6 @@ Full library: `context/signal-library.md`
 
 ---
 
-## Stack
-
-CRM: [Salesforce / HubSpot] | Enrichment: [Clay / Apollo] | Signals: [Unify / Common Room / Trigify]
-Outbound: [Outreach / Smartlead] | Call intel: [Gong / Fathom] | Intent: [G2 / 6sense / None]
-
----
-
 ## Team
 
 | Name | Role | Owns |
@@ -101,16 +94,28 @@ Outbound: [Outreach / Smartlead] | Call intel: [Gong / Fathom] | Intent: [G2 / 6
 
 ---
 
-## Quick Commands
+## Quick Start
 
+**Research an account:**
 ```
-# Research an account
-Read skills/account-research/SKILL.md and research [company.com]
-
-# Score a list
-Read skills/icp-scoring/SKILL.md and score these accounts: [paste list]
-
-# Build a campaign
-Read skills/signal-to-sequence/SKILL.md — build a Tier 2 campaign for
-accounts that triggered [signal name], targeting [persona title]
+Research [company.com]
 ```
+
+**Score a list:**
+```
+Score these accounts and tell me who to prioritize:
+[paste list]
+```
+
+**Write messaging:**
+```
+Write messaging for [persona title] at [company].
+Signal: [what happened]
+```
+
+**Run weekly sync (ops):**
+```
+Read skills/sync/SKILL.md and run the weekly sync.
+```
+
+*Reps use these prompts in the Claude.ai Project — see `claude-project/` for setup.*

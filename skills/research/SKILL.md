@@ -1,32 +1,20 @@
-# Skill: Account Research
+# Skill: Research
 
-**Duration:** 20–40 minutes per account
-**Output:** `outputs/[date]-[account]-research.md`
+## How to use this in Claude.ai
 
----
-
-## Quick Start
+Open the **[Company] GTM Assistant** Project and send:
 
 ```
-Read skills/account-research/SKILL.md and research [company.com]
+Research [company.com]
 ```
 
-That's it. Claude will read your ICP, signals, and competitor context automatically and produce a structured research brief. See `examples/sample-company/outputs/2024-03-15-research-northstar-analytics.md` for what the output looks like.
+That's it. Claude has your ICP, signals, personas, and competitive context loaded automatically. The full research brief will appear inline — copy it into your CRM notes or call prep doc.
 
 ---
 
 ## Purpose
 
 Build a complete intelligence brief on a target account before any outreach. The goal is not a company summary you could get from their About page. The goal is to find the specific trigger — the moment, the hire, the product shift, the funding event — that makes this the right time to reach out, and the right angle to use.
-
----
-
-## When to Run This Skill
-
-- Before any Tier 1 outreach (always)
-- Before a discovery call (refresh if research is older than 2 weeks)
-- When a signal fires and you need to build a personalized first touch
-- When an account enters the pipeline and the AE needs full context
 
 ---
 
@@ -110,10 +98,11 @@ Answer these questions:
 
 ## Output Format
 
+Produce the full brief below. Format it clearly — reps will copy this into CRM notes or their call prep doc.
+
 ```markdown
 # Account Research: [Company Name]
 Date: [YYYY-MM-DD]
-Researched by: [Claude / Name]
 Signal score: [X/100]
 Recommended action: [Immediate outreach / Sequence / Monitor / Skip]
 
@@ -150,14 +139,14 @@ Recommended action: [Immediate outreach / Sequence / Monitor / Skip]
 **Recommended sender:** [Name / Role]
 
 ## Suggested Next Action
-[Specific: which sequence, which template, which stakeholder, which channel]
+[Specific: which persona to contact first, which channel, what signal to reference in the first touch]
 ```
 
 ---
 
 ## Quality Check
 
-Before filing the output, confirm:
+Before presenting the output, confirm:
 
 - [ ] The "why now" is specific — a datable event or observable condition, not a generic assumption
 - [ ] The stakeholder map has at least 2 people with contact info

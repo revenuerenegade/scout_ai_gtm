@@ -1,93 +1,23 @@
 # GTM Starter Kit
 
-Built by [The Revenue Architects](https://www.the-revenue-architects.com) — a GTM engineering firm based in San Francisco. We work with growth-stage B2B SaaS companies to design and build their revenue systems: signal infrastructure, CRM architecture, data pipelines, AI-powered workflows, and the operational layer that connects them.
+Built by [The Revenue Architects](https://www.the-revenue-architects.com) — a GTM engineering firm based in San Francisco. We work with growth-stage B2B SaaS companies to design and build their revenue systems.
 
-This repo is the open-source version of what we build with clients. Clone it, fill in your context files once, and run AI-powered GTM tasks from a single prompt — no rebuilding context every session.
-
----
-
-## How It Works
-
-Claude Code reads `CLAUDE.md` automatically at the start of every session. That file contains your company overview, ICP, signals, personas, and current priorities. Once it's filled in, you can run any task with a one-line prompt — no re-explaining your context each time.
-
-```
-Read skills/account-research/SKILL.md and research stripe.com
-```
-
-Claude reads your ICP, signals, and personas from the repo and produces a full account research brief. You didn't paste any context. It was already there.
+This repo is the open-source version of what we build with clients. Clone it, run setup once, and your sales team has an AI-powered GTM assistant in Claude.ai — no rebuilding context every session.
 
 ---
 
-## What's Inside
+## Two Layers
 
-```
-gtm-starter-kit/
-│
-├── CLAUDE.md                           ← Fill this in first. Claude reads it every session.
-│
-├── context/                            ← Your GTM institutional knowledge
-│   ├── profile.md                      ← Company overview, product, team, reference customers
-│   ├── icp-definition.md              ← ICP tiers, filters, anti-ICP, qualification criteria
-│   ├── signal-library.md              ← Signals with scoring, detection methods, hooks
-│   ├── positioning.md                 ← Value pillars, competitive positioning, what not to say
-│   ├── competitor-radar.md            ← Battlecards, win/loss patterns
-│   └── personas/
-│       └── template.md                ← Persona template — duplicate for each buyer role
-│
-├── sync/                               ← Scripts for pulling live data into the repo
-│   ├── README.md                       ← Setup and usage
-│   ├── .env.example                    ← Copy to .env and fill in API keys
-│   ├── sync-campaign-results.py        ← Pull reply/meeting rates from outbound tool
-│   └── sync-signal-performance.py     ← Aggregate signal performance across campaigns
-│
-├── skills/                             ← Claude executes these. One-line prompts.
-│   ├── setup/SKILL.md                 ← Run first. Provide domain → repo auto-populated.
-│   ├── account-research/SKILL.md      ← Deep research on any account before outreach
-│   ├── signal-to-sequence/SKILL.md    ← Turn a signal into a live outbound campaign
-│   ├── icp-scoring/SKILL.md          ← Score accounts against your ICP, assign tiers
-│   └── weekly-update/SKILL.md        ← Keep context current. Run Monday mornings.
-│
-├── workflows/                          ← How your team operates. Human process docs.
-│   ├── enrichment.md                  ← Data waterfall: free sources → Clay → proprietary
-│   ├── signal-routing.md              ← Decision tree: signal fires → what happens next
-│   └── campaign-build.md             ← End-to-end: audience → launch → measurement
-│
-├── playbooks/                          ← Step-by-step for specific situations
-│   ├── new-signal-response.md         ← Signal fires: validate → score → research → send
-│   └── competitor-switch.md          ← Four scenarios: unknown, active eval, intent, locked in
-│
-├── outputs/                            ← All skill outputs land here
-│   ├── scoring/                        ← ICP scoring outputs
-│   ├── campaigns/                      ← Campaign briefs and sequences
-│   └── .gitkeep
-│
-└── examples/
-    └── sample-company/                 ← Relay — a fully built-out example
-        ├── CLAUDE.md
-        ├── context/
-        │   ├── profile.md
-        │   ├── icp-definition.md
-        │   ├── signal-library.md      ← Has real performance data attached
-        │   ├── positioning.md         ← Value pillars, messaging matrix, what not to say
-        │   ├── competitor-radar.md
-        │   └── personas/
-        │       └── head-of-revops.md
-        └── outputs/
-            ├── weekly-log.md          ← Change history from weekly-update skill runs
-            ├── 2024-03-15-research-northstar-analytics.md   ← Sample research brief
-            └── campaigns/
-                └── 2024-03-01-series-b-revops-tier2/
-                    ├── brief.md       ← Campaign brief with results tracking
-                    └── sequences.md  ← Full email sequences, live copy
-```
+| Layer | Who uses it | Interface | What it does |
+|-------|-------------|-----------|-------------|
+| **Claude Code (this repo)** | GTM ops / admin | Terminal | Setup once, sync weekly, maintain context |
+| **Claude.ai Project** | All sales reps | Claude.ai web | Research, prospect scoring, sales messaging |
 
-**Skills vs. Workflows — what's the difference?**
-- **Skills** are for Claude to execute. You run them with a prompt and Claude produces an output. This includes the weekly-update skill, which keeps the repo current rather than producing a deliverable.
-- **Workflows** document how your team operates — the decision trees and processes that connect your tools. They're reference documents for humans, not execution instructions for Claude.
+Ops fills in the context once. Claude.ai serves it to reps automatically. When context changes, ops re-uploads the affected files. Reps get the update on their next message — no action needed on their end.
 
 ---
 
-## Getting Started in 3 Steps
+## For GTM Ops
 
 ### Step 1: Clone and open
 
@@ -97,39 +27,82 @@ cd gtm-starter-kit
 claude .
 ```
 
----
-
-### Step 2: Run setup with your domain (15–30 min)
+### Step 2: Run setup (15–30 min)
 
 ```
 Read skills/setup/SKILL.md and set up this repo for [your-domain.com]
 ```
 
-Claude researches your company — website, Crunchbase, LinkedIn, G2, job postings — and writes every context file immediately from public data. No questions asked upfront. You see the repo populate in real time.
+Claude researches your company publicly — website, Crunchbase, LinkedIn, G2, job postings — and writes every context file from real data. When it's done, it offers a short refinement pass to sharpen anything inferred.
 
-When it's done, it shows you what was filled and what was inferred — then offers a 3-minute refinement pass (5 questions) to replace inferred fields with your actual win patterns, ACV range, and signals. Optional. The repo works either way.
+**Then setup walks you through deploying to Claude.ai inline** — it outputs the Project instructions, the file upload list, and the rep skills sheet, all in one message. About 10 minutes to go live.
+
+### Step 3: Sync weekly (10 min)
+
+```
+Read skills/sync/SKILL.md and run the weekly sync.
+```
+
+Run this every Monday. Claude identifies stale sections, drafts updates, and asks you to confirm. After applying changes, it tells you exactly which files to re-upload to the Claude.ai Project.
 
 ---
 
-### Step 3: Run your first skill
+## For Sales Reps
+
+You don't need this repo. Open the **[Company] GTM Assistant** Project in Claude.ai and use these three prompts:
 
 ```
-Read skills/account-research/SKILL.md and research [company.com]
+Research [company.com]
+```
+```
+Score these accounts and tell me who to prioritize:
+[paste company names or domains]
+```
+```
+Write messaging for [persona title] at [company].
+Signal: [what happened]
 ```
 
-Your context is already there. Claude knows your ICP, your signals, your personas. The output is a full research brief — not a generic summary.
+Ask your GTM ops team for the full prompt sheet — it's in `claude-project/skills.md`.
 
-**Other skills to run next:**
+---
+
+## What's Inside
+
 ```
-# Score a list against your ICP
-Read skills/icp-scoring/SKILL.md and score these companies: [paste list]
-
-# Build a campaign from a signal
-Read skills/signal-to-sequence/SKILL.md.
-Build a Tier 2 campaign for accounts triggering [signal name]. Target [persona].
+gtm-starter-kit/
+│
+├── CLAUDE.md                           ← Claude Code session context. Fill in once.
+│
+├── context/                            ← Source of truth. Never modified by reps.
+│   ├── profile.md                      ← Company overview, product, team, reference customers
+│   ├── icp-definition.md              ← ICP tiers, filters, anti-ICP, qualification criteria
+│   ├── signal-library.md              ← Signals with scoring, detection methods, hooks
+│   ├── positioning.md                 ← Value pillars, competitive positioning, what not to say
+│   ├── competitor-radar.md            ← Battlecards, win/loss patterns
+│   └── personas/
+│       └── template.md                ← Persona template — duplicate for each buyer role
+│
+├── skills/                             ← Claude executes these in Claude Code
+│   ├── setup/SKILL.md                 ← Run once: populate context + deploy to Claude.ai
+│   ├── research/SKILL.md              ← Account intelligence brief before outreach
+│   ├── prospect/SKILL.md              ← ICP scoring and prioritization
+│   ├── message/SKILL.md               ← Ready-to-send outreach copy
+│   └── sync/SKILL.md                  ← Weekly context maintenance + Claude.ai re-upload list
+│
+├── claude-project/                     ← Claude.ai Project setup reference
+│   ├── README.md                       ← How to set up and maintain the org Project
+│   ├── instructions.md                ← Paste-ready Project custom instructions
+│   └── skills.md                       ← Rep-facing prompt sheet to share with the team
+│
+├── outputs/                            ← Skill outputs from Claude Code sessions
+│   ├── scoring/
+│   ├── plays/
+│   └── .gitkeep
+│
+└── examples/
+    └── sample-company/                 ← Relay — fully built example with real outputs
 ```
-
-All outputs land in `outputs/` — see the naming convention below.
 
 ---
 
@@ -141,28 +114,8 @@ outputs/YYYY-MM-DD-[type]-[name].md
 Examples:
 outputs/2024-03-15-research-northstar-analytics.md
 outputs/2024-03-01-scoring-q1-prospect-list.md
-outputs/campaigns/2024-03-01-series-b-revops-tier2/brief.md
+outputs/plays/2024-03-01-series-b-revops-tier2/brief.md
 ```
-
----
-
-## Keeping It Current
-
-Run the weekly-update skill every Monday morning:
-
-```
-Read skills/weekly-update/SKILL.md and run the weekly context update.
-```
-
-Claude reads the repo, identifies what's stale, drafts every section that changed, and asks you to fill in the parts it can't know. 10 minutes instead of 45.
-
-Manual cadence for the rest:
-
-| Cadence | What to update |
-|---------|---------------|
-| Weekly | Run `/weekly-update` skill |
-| After every win/loss | Update `context/competitor-radar.md` win/loss patterns |
-| Quarterly | Review `context/icp-definition.md` — add an entry to the ICP evolution log |
 
 ---
 
@@ -170,16 +123,16 @@ Manual cadence for the rest:
 
 - **CRM data or contact lists** — never commit customer or prospect data to git
 - **API keys or credentials** — use environment variables, never hardcode
-- **Raw meeting transcripts** — summarize and synthesize into the relevant context file
+- **Raw meeting transcripts** — summarize into the relevant context file
 - **Pricing** — keep commercial terms out of the repo
 
 ---
 
 ## Example
 
-`examples/sample-company/` is a fully built-out version of the repository for Relay, a fictional workflow automation platform. Every context file is populated. Two real sample outputs are included: an account research brief and a live campaign with email sequences and performance tracking.
+`examples/sample-company/` is a fully built version of the repository for Relay, a fictional workflow automation platform. Every context file is populated and two real outputs are included: an account research brief and a live play with email sequences and performance tracking.
 
-Use it as a reference when filling in your own files. The signal library in particular (`examples/sample-company/context/signal-library.md`) shows what a mature, data-backed signal library looks like — with detection methods, decay logic, performance tracking, and signal combination rules.
+Use it as a reference when filling in your own files — especially `examples/sample-company/context/signal-library.md`, which shows what a mature signal library looks like with detection methods, decay logic, and performance tracking.
 
 ---
 

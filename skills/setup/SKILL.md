@@ -173,7 +173,7 @@ Create one file per persona. If persona docs were shared, use them as the primar
 - Outreach hooks: one hook per Tier 1 signal from the signal library. Use messaging from the messaging doc where available.
 
 ### 7. `CLAUDE.md`
-Fill with all of the above — ICP summary, top 3 signals, persona table, positioning summary. For "This Week's Priorities," leave blank with a prompt: `[Update with current campaign focus before running skills]`.
+Fill with all of the above — ICP summary, top 3 signals, persona table, positioning summary. For "This Week's Priorities," leave blank with a prompt: `[Update with current play focus before running skills]`.
 
 ---
 
@@ -200,24 +200,18 @@ These are Claude's best guess — good enough to run skills against,
 but may not match your actual win patterns.
 
 ---
-
-You can start using the repo right now:
-
-  Read skills/account-research/SKILL.md and research [example account from their ICP]
-
----
 [If inferred fields remain]:
 Want to sharpen what's still inferred? I'll ask only about the gaps —
 [N] questions based on what wasn't in the docs. Takes 2–3 minutes.
 
-Type "refine" to continue, or skip and start running skills.
+Type "refine" to continue or "deploy" to skip ahead and set up the Claude.ai Project.
 ```
 
-If there are no `[inferred]` fields remaining, skip the refinement offer entirely — the repo is complete.
+If there are no `[inferred]` fields remaining, skip the refinement offer and proceed directly to Step 6.
 
 ---
 
-## Step 5: Targeted Refinement Pass (Optional)
+## Step 5: Targeted Refinement Pass (Optional — skip with "deploy")
 
 Only run this if `[inferred]` fields remain after Step 3.
 
@@ -240,7 +234,7 @@ Top 3 signals — what tells you an account is ready to buy?
 (Only ask if not in docs or signal library is fully inferred)
 Can be rough — I'll structure them.
 
-This week — what's your current focus? Any active or planned campaigns?
+This week — what's your current focus? Any active or planned plays?
 (Always ask — this changes too frequently to be in any doc)
 
 Competitive nuance — anything not in what you shared?
@@ -257,6 +251,123 @@ Updated with your answers:
 
 All [inferred] flags removed.
 [If any remain]: Still inferred: [list] — update these when you have the data.
+```
+
+Then proceed to Step 6.
+
+---
+
+## Step 6: Deploy to Claude.ai
+
+After setup (and optional refinement) is complete, walk through this deployment. Present it inline — no need to open any other file.
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Deploy to Claude.ai — share this with your whole team in 10 minutes
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Go to claude.ai → click "Projects" → "New Project"
+   Name it: [Company] GTM Assistant
+
+2. Open Project settings → Knowledge → upload these 6 files:
+   • context/profile.md
+   • context/icp-definition.md
+   • context/signal-library.md
+   • context/positioning.md
+   • context/competitor-radar.md
+   • context/personas/[your persona files]
+
+3. Open Project settings → Instructions → paste the block below:
+────────────────────────────────────────
+[PASTE THE PROJECT INSTRUCTIONS BELOW — filled in with this company's voice and product]
+
+You are a GTM assistant for [Company]. You help sales reps with three things:
+research on target accounts, ICP scoring and prioritization, and writing
+outreach copy. The context files in this Project contain everything you need:
+company profile, ICP definition, signals, positioning, competitive intel,
+and buyer personas.
+
+How to work: produce complete, paste-ready outputs. Do not ask clarifying
+questions unless something truly critical is missing (a company name, a persona).
+Make a reasonable assumption and proceed.
+
+Voice and tone: [Insert 2–3 sentences from context/positioning.md "Voice" section
+— the exact language that makes copy sound like [Company], not generic AI.]
+
+The three deliverables:
+
+RESEARCH — Account intelligence brief: company snapshot, recent hires, tech
+stack, stakeholder map, active signals, competitive context, and a specific
+outreach angle with a proposed first line.
+
+PROSPECT — ICP score and tier for one or more accounts: firmographic fit,
+technographic fit, organizational fit, signal score, total score, tier (1–4),
+qualifying reasons, and recommended next action.
+
+MESSAGE — Complete outreach sequence: 3 subject line options, first touch
+email, LinkedIn connection request note, LinkedIn DM, voicemail script,
+2 follow-up emails, break-up email. All copy is ready to send.
+
+Output rules:
+- Always produce complete copy. Never produce a framework when the rep asked for content.
+- No placeholders in final output (no [INSERT HOOK HERE]).
+- Do not name competitors in first-touch outreach. Use the competitive angle from the battlecard.
+- Do not manage CRM records, set tasks, or send emails. Produce the content. The rep sends it.
+- Do not invent contact information. Use a title placeholder if a name is unknown.
+────────────────────────────────────────
+
+4. Share this prompt sheet with your reps — paste it into Slack, Notion, or wherever your team lives:
+
+────────────────────────────────────────
+[Company] GTM Assistant — 3 things it does
+
+Open the [Company] GTM Assistant Project in Claude.ai and use these prompts:
+
+── RESEARCH ────────────────────────────────────────
+Use before any outreach or discovery call.
+
+  Research [company.com]
+
+Produces: company snapshot, stakeholder map, signals, competitive
+context, and a specific outreach angle with a suggested first line.
+Example: Research stripe.com
+
+── PROSPECT ────────────────────────────────────────
+Use before building your weekly list. Paste up to 50 accounts.
+
+  Score these accounts and tell me who to prioritize:
+  [paste company names or domains]
+
+Produces: ICP tier (1–4), score, qualifying reasons, next action.
+Example: Score these: Linear, Retool, Rippling, Lattice, Notion
+
+── MESSAGE ─────────────────────────────────────────
+Use when you need copy for a specific account + trigger.
+
+  Write messaging for [persona title] at [company].
+  Signal: [what happened]
+
+Produces: 3 subject lines, first touch email, LinkedIn note + DM,
+voicemail, 2 follow-ups, break-up email. All paste-ready.
+Example:
+  Write messaging for the Head of RevOps at Linear.
+  Signal: Series B announced 3 weeks ago, 2 RevOps roles just posted.
+
+For competitive accounts, add:
+  They currently use [competitor]. Don't name them in the first touch.
+────────────────────────────────────────
+
+Checklist:
+[ ] Project created in Claude.ai
+[ ] 6 context files uploaded
+[ ] Project instructions pasted
+[ ] Skills prompt sheet shared with reps
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Keeping it current: run `Read skills/sync/SKILL.md and run the weekly sync`
+each Monday. The sync skill will tell you exactly which files to re-upload
+to the Claude.ai Project when context changes.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ---

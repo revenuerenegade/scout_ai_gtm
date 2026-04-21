@@ -1,6 +1,6 @@
 # ICP Definition
 
-*This is the canonical ICP document. All campaigns, scoring models, and outreach sequences reference this file. Update it when your understanding of the ideal customer evolves — and note the date of each change.*
+*This is the canonical ICP document. All plays, scoring models, and outreach sequences reference this file. Update it when your understanding of the ideal customer evolves — and note the date of each change.*
 
 Last updated: [YYYY-MM-DD]
 

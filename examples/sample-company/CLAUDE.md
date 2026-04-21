@@ -99,14 +99,6 @@ Full library: `context/signal-library.md`
 
 ---
 
-## Workflows
-
-- `workflows/enrichment.md` — Clay waterfall for account + contact enrichment
-- `workflows/signal-routing.md` — How signals route to Outreach or SDR queue
-- `workflows/campaign-build.md` — Campaign launch process
-
----
-
 ## Team
 
 | Name | Role | Owns |
@@ -120,28 +112,32 @@ Full library: `context/signal-library.md`
 
 ## Current Priorities
 
-- [ ] Build Series B signal campaign for Q2 (400 accounts identified, enrichment 60% complete)
-- [ ] Rebuild Zapier competitive campaign — current reply rate is 1.2%, target is 4%
+- [ ] Build Series B signal play for Q2 (400 accounts identified, enrichment 60% complete)
+- [ ] Rebuild Zapier competitive play — current reply rate is 1.2%, target is 4%
 - [ ] Implement signal decay scoring — accounts from 2023 are inflating our active list
 
 ---
 
-## How to Use This Repo
+## Quick Start
 
 **Research an account:**
 ```
-Read skills/account-research/SKILL.md and research [company.com]
+Research [company.com]
 ```
 
 **Score a list:**
 ```
-Read skills/icp-scoring/SKILL.md and score the companies in [paste list].
-Output a table sorted by score. Flag anything ≥ 60.
+Score these accounts and tell me who to prioritize:
+[paste list]
 ```
 
-**Build a campaign:**
+**Write messaging:**
 ```
-Read skills/signal-to-sequence/SKILL.md. Build a campaign for accounts
-that triggered the "Series B in last 60 days" signal. Target the Head of RevOps
-persona. Tier 2 intensity.
+Write messaging for [persona title] at [company].
+Signal: [what happened]
+```
+
+**Run weekly sync (ops):**
+```
+Read skills/sync/SKILL.md and run the weekly sync.
 ```

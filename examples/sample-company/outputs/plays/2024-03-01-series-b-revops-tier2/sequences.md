@@ -1,4 +1,4 @@
-# Campaign Sequences: Series B + RevOps Hire — Tier 2
+# Play Sequences: Series B + RevOps Hire — Tier 2
 
 ---
 
