@@ -19,6 +19,18 @@ Ops fills in the context once. Claude.ai serves it to reps automatically. When c
 
 ---
 
+## Prerequisites
+
+You need **Claude Code** (the CLI) installed before running this repo.
+
+- [Quickstart guide — Anthropic docs](https://code.claude.com/docs/en/quickstart)
+- [Setup & install — Anthropic docs](https://code.claude.com/docs/en/setup)
+- [How to install Claude Code (YouTube)](https://www.youtube.com/watch?v=QsjrBQK0lTg)
+
+Once installed, verify with `claude --version`, then continue to **For GTM Ops** below.
+
+---
+
 ## For GTM Ops
 
 ### Step 1: Clone and open
